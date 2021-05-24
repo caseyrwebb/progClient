@@ -79,32 +79,6 @@ function MyTable(props) {
                       <MyTable data={data[k]} />
                     </td>
                   );
-                } else if (data[k] === "Error") {
-                  return (
-                    <td
-                      width="80%"
-                      style={{
-                        backgroundColor: "#d94548",
-                        color: "white",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {data[k]}
-                    </td>
-                  );
-                } else if (data[k] === "Warning") {
-                  return (
-                    <td
-                      width="80%"
-                      style={{
-                        backgroundColor: "#faa107",
-                        color: "white",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {data[k]}
-                    </td>
-                  );
                 } else return <td width="80%">{data[k]}</td>;
               })()}
             </tr>

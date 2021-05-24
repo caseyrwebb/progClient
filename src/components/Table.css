@@ -2,14 +2,6 @@ table {
   border-collapse: collapse;
 }
 
-caption {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  color: #6c757d;
-  text-align: left;
-  caption-side: bottom;
-}
-
 th {
   text-align: inherit;
 }
@@ -377,11 +369,4 @@ table td {
   border-right: 1px solid #bcbcbc;
   border-bottom: 1px solid #bcbcbc;
   background: white;
-}
-.bg-white {
-  background: white;
-  border: 0px !important;
-}
-.p-20 {
-  padding: 20px !important;
 }

@@ -4,6 +4,7 @@ import axios from "axios";
 import ProgContext from "./util/ProgContext";
 
 import MyTable from "./components/MyTable";
+import CameraTable from "./components/CameraTable";
 import ProgBox from "./components/ProgBox";
 
 function App() {
@@ -16,6 +17,11 @@ function App() {
     const prog = data.data;
     setProgData(prog);
     console.log(prog);
+  };
+
+  const handleDropDown = () => {
+    setTable(null);
+    setDropDown(!dropDown);
   };
 
   return (
@@ -32,12 +38,13 @@ function App() {
                 borderRadius: "16px",
                 display: "flex",
                 justifyContent: "space-between",
+                minWidth: "500px",
                 width: "60%",
                 paddingLeft: "1em",
                 paddingRight: "1em",
                 marginTop: "2em",
               }}
-              onClick={() => setDropDown(!dropDown)}
+              onClick={handleDropDown}
             >
               <p>System Time: {progData[0].systemTime.$t}</p>
               <p>Name: {progData[0].contactInfo.Name.$t}</p>
@@ -51,6 +58,7 @@ function App() {
                 display: "flex",
                 justifyContent: "space-evenly",
                 width: "60%",
+                minWidth: "500px",
               }}
             >
               {dropDown &&
@@ -59,12 +67,27 @@ function App() {
                   key !== "systemTime" &&
                   key !== "cameras" ? (
                     <div key={key}>
-                      <ProgBox data={key} />
+                      <ProgBox title={key} data={progData[0][key]} />
                     </div>
                   ) : null
                 )}
             </div>
-            {table && <MyTable data={progData[0][table]} />}
+            {table && (
+              <div style={{ marginTop: "1em" }}>
+                {table === "peripherals" ? (
+                  <div style={{ display: "flex", flexWrap: "wrap" }}>
+                    <div style={{ width: "50%", minWidth: "375px" }}>
+                      <MyTable data={progData[0][table]} />
+                    </div>
+                    <div style={{ width: "50%", minWidth: "375px" }}>
+                      <CameraTable data={progData[0].cameras} />
+                    </div>
+                  </div>
+                ) : (
+                  <MyTable data={progData[0][table]} />
+                )}
+              </div>
+            )}
           </>
         ) : null}
       </ProgContext.Provider>
